@@ -41,7 +41,7 @@ function ArticlePage({ searchParams }: Props) {
             <p className="pt-4">{article.content}</p>
           ) : (
             <p className="pt-4">
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Consectetur at distinctio amet, quidem molestias ex alias. Illo
               voluptate quisquam est sint a eius id explicabo, excepturi officia
               aperiam modi dolor ea repellat similique distinctio corrupti optio
