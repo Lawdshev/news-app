@@ -25,7 +25,7 @@ export default function RootLayout({
        dark:bg-zinc-900 transition-all-duration-700"
       >
         <Providers>
-          <UserAuthContextProvider>
+          <UserAuthContextProvider initialState={null}>
             <FavouriteProvider>
               <Header />
               <div className="max-w-6xl mx-auto">{children}</div>
