@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "./fragments/header";
 import Providers from "./providers/theme-provider";
+import { UserAuthContextProvider } from "./providers/user-auth-context-provider";
+import { FavouriteProvider } from "./hooks/favourite";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,8 +25,12 @@ export default function RootLayout({
        dark:bg-zinc-900 transition-all-duration-700"
       >
         <Providers>
-          <Header />
-          <div className="max-w-6xl mx-auto">{children}</div>
+          <UserAuthContextProvider>
+            <FavouriteProvider>
+              <Header />
+              <div className="max-w-6xl mx-auto">{children}</div>
+            </FavouriteProvider>
+          </UserAuthContextProvider>
         </Providers>
       </body>
     </html>

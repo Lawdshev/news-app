@@ -2,29 +2,37 @@
 import React, { ReactElement } from "react";
 import { render, RenderOptions, RenderResult } from "@testing-library/react";
 import { ThemeProvider } from "next-themes";
+import {
+  UserAuthContextProvider,
+} from "@/app/providers/user-auth-context-provider";
+import { FavouriteProvider } from "@/app/hooks/favourite";
 
 interface TestProviderOptions {
   theme?: string;
+  initialState?: any;
 }
 
 interface CustomOptions extends RenderOptions, TestProviderOptions {}
 
 const createTestProviders =
-  ({ theme = "dark" }: TestProviderOptions): React.FC =>
-  ({ children }: React.PropsWithChildren<{}>) =>
+  ({ theme = "dark", initialState=null }: TestProviderOptions): React.FC =>
+    ({ children }: React.PropsWithChildren<{}>) =>
+    
     (
       <ThemeProvider
         defaultTheme={theme}
         enableSystem={false}
         attribute="class"
       >
-        {children}
+        <UserAuthContextProvider initialState={initialState}>
+          <FavouriteProvider>{children}</FavouriteProvider>
+        </UserAuthContextProvider>
       </ThemeProvider>
     );
 
 const customRender = (
   ui: ReactElement,
-  { theme, ...options }: CustomOptions = {}
+  { theme,initialState, ...options }: CustomOptions = {}
 ): RenderResult =>
   render(ui, { wrapper: createTestProviders({ theme }), ...options });
 

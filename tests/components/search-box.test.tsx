@@ -1,5 +1,5 @@
 import "../matchMedia.mock";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, act, waitFor } from "../test-utils";
 import { useRouter } from "next/navigation";
 import SearchBox from "@/components/search-box";
 
@@ -20,6 +20,13 @@ jest.mock("next/navigation", () => ({
     };
   },
 }));
+
+jest.mock("next/link", () => ({
+  Link({ href, children }: { href: string; children: React.ReactNode }) {
+    return <a href={href} data-testid="link-element">{children}</a>;
+  },
+}));
+
 
 describe("SearchBox", () => {
   beforeEach(async () => {
@@ -73,4 +80,37 @@ describe("SearchBox", () => {
     // Assert that useRouter is called with the correct URL
     expect(useRouter).toHaveBeenCalled();
   });
+
+  it("does not render link when user is null", () => {
+  
+     // Mocking useUserAuth to return null user
+     jest.mock("../../src/app/providers/user-auth-context-provider", () => ({
+       useUserAuth() {
+         return {
+           user: null,
+         };
+       },
+     }));
+
+  async () => {
+    await act(async () => {
+      render(<SearchBox />);
+    });
+  };
+     expect(screen.queryByTestId("link-element")).not.toBeInTheDocument();
+   });
+  
+  it("renders link when user is not null", () => {
+
+  async () => {
+    await act(async () => {
+      render(<SearchBox />,{initialState:{user:{email:"test@email.com",uid:"testuid"}}});
+    });
+  };
+    waitFor(() => {
+      expect(screen.getByText(/favourites/i)).toBeInTheDocument();
+      
+    })
+  })
+
 });

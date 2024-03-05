@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Article } from "@/helpers/types";
 import NewsList from "./fragments/news-list";
 import { fetchData,fetchMoreData } from "@/app/services/fetchData";

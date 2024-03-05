@@ -1,5 +1,6 @@
+import "../matchMedia.mock"
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "../test-utils";
 import Header from "@/app/fragments/header";
 
 jest.mock("../../src/components/nav-links", () => ({
@@ -41,5 +42,23 @@ describe("Header", () => {
     render(<Header />);
     const darkModeButton = screen.getByTestId("mocked-dark-mode-button");
     expect(darkModeButton).toBeInTheDocument();
+  });
+
+  it("renders login button correctly", () => {
+    render(<Header />);
+    const loginButton = screen.getByRole("button", { name: "Login" });
+    expect(loginButton).toBeInTheDocument();
+  });
+
+  it("renders logout button correctly", () => {
+    render(<Header />, { initialState: { user: { email: "test" } } });
+    waitFor(() => {
+      const logoutButton = screen.getByRole("button", { name: "Logout" });
+      expect(logoutButton).toBeInTheDocument();   
+      fireEvent.click(logoutButton);
+      waitFor(() => {
+        expect(logoutButton).not.toBeInTheDocument();
+      })
+    })
   });
 });
