@@ -80,10 +80,10 @@ function Signup() {
           </button>
         </form>
         <div className="mt-3">
-          Already have an account?{" "}
+          Already have an account?
           <Link href="/login" className="text-blue-500">
             Login
-          </Link>{" "}
+          </Link>
         </div>
       </div>
     </div>
