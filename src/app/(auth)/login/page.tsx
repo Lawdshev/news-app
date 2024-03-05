@@ -79,11 +79,11 @@ const Login = () => {
             type="submit"
             className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out w-full font-[400] mt-[3%]"
           >
-            { loading ? "Loading..." : "Login"}
+            {loading ? "Loading..." : "Login"}
           </button>
         </form>
         <div className="mt-3">
-          Don't have an account?
+          Don&apos;t have an account?{" "}
           <Link href="/signup" className="text-blue-500">
             Sign up here
           </Link>
