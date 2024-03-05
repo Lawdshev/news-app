@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import NavLinks from "@/components/nav-links";
@@ -8,10 +8,10 @@ import DarkModeButton from "@/components/dark-mode-button";
 import { useUserAuth } from "../providers/user-auth-context-provider";
 
 function Header() {
-  const { user,logOut } = useUserAuth(); 
+  const { user, logOut } = useUserAuth(); 
 
   return (
-    <header style={{display: window.location.pathname.toLowerCase() === "/login" || window.location.pathname.toLowerCase() === "/signup" ? "none" : "block"}}>
+    <header style={{display: global?.window?.location.pathname.toLowerCase() === "/login" || global?.window?.location.pathname.toLowerCase() === "/signup" ? "none" : "block"}}>
       <div className="grid grid-cols-3 p-10 items-center">
         <Bars3Icon className="h-8 w-8 cursor-pointer" />
         <Link href="/" prefetch={false}>

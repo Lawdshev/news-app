@@ -30,8 +30,8 @@ const userAuthContext = createContext<AuthContextValue>({
 });
 
 export function UserAuthContextProvider({ children,initialState=null }:{
-  children: React.ReactNode,initialState:User|null}) {
-  const [user, setUser] = useState<User | null>(initialState);
+  children: React.ReactNode,initialState?:User|null}) {
+  const [user, setUser] = useState<User | null>(initialState || null);
 
   function signUp(email: string, password: string) {
     return createUserWithEmailAndPassword(auth, email, password);
