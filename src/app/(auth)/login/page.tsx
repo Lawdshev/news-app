@@ -83,7 +83,7 @@ const Login = () => {
           </button>
         </form>
         <div className="mt-3">
-          Don&apos;t have an account?{" "}
+          Don&apos;t have an account?
           <Link href="/signup" className="text-blue-500">
             Sign up here
           </Link>
